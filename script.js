@@ -1,13 +1,17 @@
-const imageContinaer = document.getElementById("image-container");
+const imageContainer = document.getElementById("image-container");
 const loader = document.getElementById("loader");
 
 let photosArray = [];
 
 //Unsplash API
-const count = 10;
+const count = 30;
 const apiKey = "Ychw4o5R3UKCOnCWBcuxOo6nzD6Avy_NFKeOZRLwk5M";
 const apiURL = `https://api.unsplash.com/photos/random/?client_id=${apiKey}&count=${count}`;
 
+//check if all images loaded
+function imageLoaded() {
+  console.log("image loaded");
+}
 //Helper fucntion to set attribute on dom elements
 function setAttribute(element, attributes) {
   for (const key in attributes) {
@@ -38,9 +42,13 @@ function displayPhotos() {
       alt: photo.alt_description,
       title: photo.alt_description,
     });
+
+    //Event Listener, check when each is finished loading
+    img.addEventListener("load", imageLoaded);
+
     //Put <img> inside <a>, then put both inside imagecontainer element
     item.appendChild(img);
-    imageContinaer.appendChild(item);
+    imageContainer.appendChild(item);
   });
 }
 
